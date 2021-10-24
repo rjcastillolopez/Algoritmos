@@ -23,7 +23,7 @@ void Pixel(int x, int y) {
 
 // Función para graficar una linea utilizando el algoritmo del punto medio:
 int AlgoritmoPuntoMedioLinea(int x_a, int y_a, int x_b, int y_b) {
-	int x0, xn , x, y0, yn, y;
+	int x0, xn, x, y0, yn, y;
 	// Identificar x0 y xn:
 	if (x_a <= x_b) {
 		x0 = x = x_a; y0 = y = y_a;
@@ -36,35 +36,37 @@ int AlgoritmoPuntoMedioLinea(int x_a, int y_a, int x_b, int y_b) {
 
 	int dx = xn - x0, dy = yn - y0;
 	float m = (float)dy / dx; 
-	float b = y0 - m * x0;
-	float pk, xm, ym;
-	int sgn, steps;
+	int pk, sgn, steps;
 	if (dx != 0) {
 		if (m >= 0) sgn = 1;
 		else sgn = -1;
 		if (abs(m) <= 1) { // Primer caso
 			steps = dx;
+			pk = abs(dy) - 0.5 * dx;
 			for (int k = 0; k <= steps; k++) {
 				Pixel(x, y);
-				xm = x + 1;
-				ym = y + sgn * 0.5;
-				pk = sgn * (dy * xm - dx * ym + dx * b);
 				x++;
-				if (pk > 0) {
-					y += sgn * 1;
+				if (pk <= 0) {
+					pk += abs(dy);
+				}
+				else {
+					y += sgn * 1; 
+					pk += abs(dy) - dx;
 				}
 			}
 		}
 		else { // Segundo caso
 			steps = abs(dy);
+			pk = dx - 0.5 * abs(dy);
 			for (int k = 0; k <= steps; k++) {
 				Pixel(x, y);
-				xm = x + 0.5;
-				ym = y + sgn * 1;
-				pk = sgn * (dx * ym - dy * xm - dx * b);
 				y += sgn * 1;
-				if (pk > 0) {
+				if (pk <= 0) {
+					pk += dx;
+				}
+				else {
 					x++;
+					pk += dx - abs(dy);
 				}
 			}
 		}
