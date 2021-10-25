@@ -1,5 +1,5 @@
-// Nombre               : AlgoritmoBresenham.cpp
-// Propósito            : Programa para graficar lineas utilizando el Algoritmo de Bresenham.
+// Nombre               : AlgoritmoBresenham-PuntoMedio.cpp
+// Propósito            : Programa para graficar lineas utilizando el Algoritmo de Bresenham o el Algoritmo del Punto Medio.
 // Autor                : Ricardo J. Castillo López
 // Fecha de creación    : 
 // Fecha de modificación: 
